@@ -18,7 +18,10 @@ func main() {
 	token := args[0]
 	var raider discord.UserID
 	if len(args) > 1 {
-		s, _ := strconv.Atoi(args[1])
+		s, err := strconv.Atoi(args[1])
+		if err != nil {
+			log.Fatalln("failed to convert userid to int:", err)
+		}
 		raider = discord.UserID(s)
 	}
 	if token == "" {

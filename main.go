@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/diamondburned/arikawa/v2/discord"
 	"github.com/diamondburned/arikawa/v2/gateway"
@@ -60,10 +62,12 @@ func main() {
 		log.Fatalln("cancelled")
 	}
 
+	rand.Seed(time.Now().UnixNano())
 	for _, group := range groups {
 		if err := s.DeleteChannel(group.ID); err != nil {
 			log.Printf("failed to leave group %d: %v", group.ID, err)
 		}
+		time.Sleep(time.Duration(rand.Intn(500)))
 	}
 }
 

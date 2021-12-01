@@ -4,13 +4,21 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
+	"github.com/diamondburned/arikawa/v2/discord"
 	"github.com/diamondburned/arikawa/v2/gateway"
 	"github.com/diamondburned/arikawa/v2/state"
 )
 
 func main() {
-	token := os.Args[1]
+	args := os.Args[1:]
+	token := args[0]
+	var raider discord.UserID
+	if len(args) > 1 {
+		s, _ := strconv.Atoi(args[1])
+		raider = discord.UserID(s)
+	}
 	if token == "" {
 		log.Fatalln("missing $TOKEN")
 	}
@@ -37,28 +45,24 @@ func main() {
 
 	fmt.Println("found these groups:")
 
+	groups := []discord.Channel{}
 	for _, dm := range s.Ready().PrivateChannels {
-		if dm.Type != 3 {
-			continue
-		}
-		if err != nil {
-			fmt.Printf("  - %d (error: %s)\n", dm.ID, err)
+		if (dm.Type != 3) || (raider != 0 && dm.DMOwnerID != raider) {
 			continue
 		}
 		fmt.Printf("  - %s (%d)\n", dm.Name, dm.ID)
+		groups = append(groups, dm)
+		continue
 	}
 
-	if !ask("continue?", 'Y', 'y') {
+	if !ask("continue? (y|n)", 'Y', 'y') {
 		fmt.Println()
 		log.Fatalln("cancelled")
 	}
 
-	for _, dm := range s.Ready().PrivateChannels {
-		if dm.Type != 3 {
-			continue
-		}
-		if err := s.DeleteChannel(dm.ID); err != nil {
-			log.Printf("failed to leave group %d: %v", dm.ID, err)
+	for _, group := range groups {
+		if err := s.DeleteChannel(group.ID); err != nil {
+			log.Printf("failed to leave group %d: %v", group.ID, err)
 		}
 	}
 }

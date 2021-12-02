@@ -1,6 +1,6 @@
 # leave groups
 
-leave all discord group dms or only ones you were added to by a specific user. forked from [leavemealone](https://github.com/diamondburned/leavemealone) to work with groups instead.
+leave all discord group dms or only ones you were added to by a specific user. forked from [leavemealone](https://github.com/diamondburned/leavemealone).
 
 ## usage
 

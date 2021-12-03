@@ -1,4 +1,4 @@
-module github.com/diamondburned/leavemealone
+module github.com/x6r/leavegroups
 
 go 1.16
 

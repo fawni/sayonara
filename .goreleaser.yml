@@ -12,6 +12,7 @@ builds:
       - darwin
     goarch:
       - amd64
+      - arm64
 
 archives:
   - builds:
@@ -20,7 +21,7 @@ archives:
       - goos: windows
         format: zip
     replacements:
-      amd64: x86_64
+      amd64: x64
 
 signs:
   - artifacts: checksum

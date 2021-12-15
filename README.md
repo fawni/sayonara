@@ -4,10 +4,14 @@ leave all discord group dms or only ones you were added to by a specific user. f
 
 ## installation
 
-`go install github.com/x6r/leavegroups@latest`
+```
+go install github.com/x6r/leavegroups@latest
+```
 
 ## usage
 
-`leavegroups TOKEN USERID`
+```
+leavegroups TOKEN USERID
+```
 
 USERID is optional. if provided, only groups whose owner's id is equal to USERID will be left.

@@ -1,11 +1,12 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"math/rand"
 	"os"
-	"strconv"
+	"path/filepath"
 	"time"
 
 	"github.com/diamondburned/arikawa/v2/discord"
@@ -13,22 +14,34 @@ import (
 	"github.com/diamondburned/arikawa/v2/state"
 )
 
-func main() {
-	args := os.Args[1:]
-	token := args[0]
-	var raider discord.UserID
-	if len(args) > 1 {
-		s, err := strconv.Atoi(args[1])
-		if err != nil {
-			log.Fatalln("failed to convert userid to int:", err)
-		}
-		raider = discord.UserID(s)
+func init() {
+	log.SetFlags(0)
+
+	flag.Usage = func() {
+		log.Println("usage:", filepath.Base(os.Args[0]), "-t \"TOKEN\" [-u USERID]")
+		flag.PrintDefaults()
 	}
-	if token == "" {
-		log.Fatalln("missing $TOKEN")
+}
+
+func main() {
+	token := flag.String("t", "", "discord account token")
+	userid := flag.Int("u", 0, "group owner id")
+	flag.Parse()
+
+	var raider discord.UserID
+
+	if *userid != 0 {
+		raider = discord.UserID(*userid)
 	}
 
-	s, err := state.New(token)
+	if *token == "" {
+		log.Printf("no discord token supplied\n\n")
+		log.Println("usage:", filepath.Base(os.Args[0]), "-t \"TOKEN\" [-u USERID]")
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
+
+	s, err := state.New(*token)
 	if err != nil {
 		log.Fatalln("failed to create state:", err)
 	}

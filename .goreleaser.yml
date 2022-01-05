@@ -1,4 +1,4 @@
-project_name: leavegroups
+project_name: sayonara
 
 before:
   hooks:
@@ -16,7 +16,7 @@ builds:
 
 archives:
   - builds:
-      - leavegroups
+      - sayonara
     format_overrides:
       - goos: windows
         format: zip

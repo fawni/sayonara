@@ -1,4 +1,4 @@
-module github.com/x6r/leavegroups
+module github.com/x6r/sayonara
 
 go 1.16
 

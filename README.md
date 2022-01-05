@@ -1,17 +1,20 @@
-# leave groups
+# sayonara
 
-leave all discord group dms or only ones you were added to by a specific user. forked from [leavemealone](https://github.com/diamondburned/leavemealone).
+leave all discord group dms or only ones you were added to by a specific user. fork of [leavemealone](https://github.com/diamondburned/leavemealone).
 
 ## installation
 
-```
-go install github.com/x6r/leavegroups@latest
+```sh
+go install github.com/x6r/sayonara@latest
 ```
 
 ## usage
 
-```
-leavegroups TOKEN USERID
+```sh
+sayonara -t "TOKEN" [-u USERID]
 ```
 
-USERID is optional. if provided, only groups whose owner's id is equal to USERID will be left.
+## notes
+
+- you will be shown which groups to be left and asked for confirmation beforehand.
+- USERID is optional. if provided, only groups whose owner's id is equal to USERID will be left.

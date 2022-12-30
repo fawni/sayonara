@@ -1,4 +1,4 @@
-module github.com/x6r/sayonara
+module github.com/fawni/sayonara
 
 go 1.16
 

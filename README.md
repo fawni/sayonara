@@ -5,7 +5,7 @@ leave all discord group dms or only ones you were added to by a specific user. f
 ## installation
 
 ```sh
-go install github.com/x6r/sayonara@latest
+go install github.com/fawni/sayonara@latest
 ```
 
 ## usage
